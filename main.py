@@ -1,5 +1,7 @@
+from helpers.core import *
+
 def main():
-    print("Hello World!")
+    play()
 
 if __name__ == "__main__":
     main()
