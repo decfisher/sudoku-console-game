@@ -16,7 +16,7 @@ def menu_list():
 
 def print_grid(grid_arr):
     # Taken from a StackOverflow thread, response by Blckknght [https://stackoverflow.com/questions/37952851/formating-sudoku-grids-python-3]
-    print("+" + "---+" * 9)
+    print("\n+" + "---+" * 9)
     for i, row in enumerate(grid_arr):
         print(("|" + " {}   {}   {} |" * 3).format(* [x if x != 0 else " " for x in row]))
         if i % 3 == 2:
@@ -24,3 +24,9 @@ def print_grid(grid_arr):
         else:
             print("+" + "   +" * 9)
     print("\n")
+
+def diff_list():
+    print("\nCHOOSE DIFFICULTY")
+    print("1. Easy")
+    print("2. Medium")
+    print("3. Hard")
