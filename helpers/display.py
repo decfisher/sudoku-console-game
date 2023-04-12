@@ -23,7 +23,6 @@ def print_grid(grid_arr):
             print("+" + "---+" * 9)
         else:
             print("+" + "   +" * 9)
-    print("\n")
 
 def diff_list():
     print("\nCHOOSE DIFFICULTY")

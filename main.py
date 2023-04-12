@@ -1,7 +1,16 @@
-from helpers.core import *
+from Sudoku.Core import Core
 
 def main():
-    play()
+    Core().play()
+
+def exit_game():
+    print("\nExiting game...")
+    exit(0)
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        exit_game()
