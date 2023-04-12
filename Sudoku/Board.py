@@ -4,6 +4,7 @@ from Sudoku.Generator import Generator
 class Board:
     def __init__(self, diff_lvl):
         self.generator = self.generate_game_board(diff_lvl)
+        self.mistakes = 0
         self.puzzle = self.generator.get_puzzle()
         self.solution = self.generator.get_solution()
 
@@ -15,6 +16,9 @@ class Board:
     
     def is_complete(self):
         return self.puzzle == self.solution
+    
+    def get_mistakes(self):
+        return self.mistakes
     
     def player_guess(self, x, y, num):
         # Revert input to zero-indexed coordinates, this allows players to guess the coordinates as seen 
@@ -38,4 +42,5 @@ class Board:
         if num == self.solution[row][col]:
             self.puzzle[row][col] = num
         else:
-            raise InvalidGuessException(f'{num} is not valid at position ({x},{y})')
+            self.mistakes += 1
+            print(f'{num} is not valid at position ({x},{y})')

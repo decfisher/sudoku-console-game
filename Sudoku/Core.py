@@ -23,11 +23,14 @@ class Core:
 					self.diff_lvl = self.choose_diff()
 					self.board = Board(self.diff_lvl)
 					while True:
+						if self.board.get_mistakes() > 3:
+							print("\nGame over! You have made too many mistakes!")
+							break
 						if self.board.is_complete():
+							print_grid(self.board.get_current_progress())
+							print("\nYou completed the board, well done!")
 							break
 						self.make_guess()
-					print_grid(self.board.get_current_progress())
-					print("\nYou completed the board, well done!")
 					break
 				if usrChoice == 2:
 					print("Bye bye!")
@@ -62,6 +65,7 @@ class Core:
 		while True:
 			try:
 				print_grid(self.board.get_current_progress())
+				print(f'\nMistakes: {self.board.get_mistakes()}/3')
 				row, col, num = self.parse_guess_input(input("\nEnter guess (row,col,num): "))
 				return self.board.player_guess(row, col, num)
 			except Exception as e:
