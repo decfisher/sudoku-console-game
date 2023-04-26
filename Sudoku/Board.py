@@ -1,10 +1,10 @@
-from Error.InvalidGuessException import InvalidGuessException
 from Sudoku.Generator import Generator
+
+from Error.InvalidGuessException import InvalidGuessException
 
 class Board:
     def __init__(self, diff_lvl):
         self.generator = self.generate_game_board(diff_lvl)
-        self.mistakes = 0
         self.puzzle = self.generator.get_puzzle()
         self.solution = self.generator.get_solution()
 
@@ -17,10 +17,7 @@ class Board:
     def is_complete(self):
         return self.puzzle == self.solution
     
-    def get_mistakes(self):
-        return self.mistakes
-    
-    def player_guess(self, x, y, num):
+    def guess(self, x, y, num):
         # Revert input to zero-indexed coordinates, this allows players to guess the coordinates as seen 
         # but allows the program to read them properly
         row = x - 1
@@ -38,9 +35,17 @@ class Board:
         if self.puzzle[row][col] != 0:
             raise InvalidGuessException(f'Grid already has a clue at position ({x},{y})')
 
-        # Check if the guess is correct
-        if num == self.solution[row][col]:
-            self.puzzle[row][col] = num
-        else:
-            self.mistakes += 1
-            print(f'{num} is not valid at position ({x},{y})')
+        # Add num to grid
+        self.puzzle[row][col] = num
+
+    def adjust_board(self, row, col, num):
+        self.puzzle[row][col] = num
+
+    def get_empty(self):
+        empty_coords = []
+        for row in range(0,9):
+            for col in range(0,9):
+                if self.puzzle[row][col] == 0:
+                    empty_coords.append((row, col, self.solution[row][col]))
+        return empty_coords
+            

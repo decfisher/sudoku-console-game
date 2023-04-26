@@ -102,7 +102,7 @@ class Generator:
 
             # Check position value is equal to zero, if not...
             if board[row][col] == 0:
-                shuffle(valid_nums)
+                shuffle(valid_nums) # Shuffle to pick random number selection
                 for num in valid_nums:
                     if self.is_valid_num(board, row, col, num):
                         # If number is valid, insert it in position
@@ -149,6 +149,4 @@ class Generator:
 
             if self.counter != 1:
                 self.board[row][col] = removed
-
         return
-
