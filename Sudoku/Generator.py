@@ -3,8 +3,8 @@ from random import shuffle
 
 # Generates a new solved solution for a game of sudoku
 class Generator:
-    def __init__(self, diff_lvl):
-        self.diff_lvl = diff_lvl
+    def __init__(self, clues):
+        self.diff_clues = clues
         self.board = self.reset_board()
         self.generate_solution(self.board)
         self.solution = copy.deepcopy(self.board)
@@ -12,10 +12,10 @@ class Generator:
         self.counter = 0
 
     def get_solution(self):
-        return self.solution
+        return copy.deepcopy(self.solution)
     
     def get_puzzle(self):
-        return self.board
+        return copy.deepcopy(self.board)
     
     def reset_board(self):
         return [[0 for i in range(9)] for j in range(9)]
@@ -137,7 +137,7 @@ class Generator:
         filled = self.find_filled(self.board)
         filled_count = len(filled)
 
-        while filled_count > self.diff_lvl:
+        while filled_count > self.diff_clues:
             row, col = filled.pop()
             filled_count -= 1
             removed = self.board[row][col]
